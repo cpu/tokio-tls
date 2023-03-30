@@ -9,7 +9,7 @@ use std::pin::Pin;
 use std::process::{Child, Command, Stdio};
 use std::sync::Arc;
 use std::task::{Context, Poll};
-use std::thread;
+use std::{thread, time};
 use std::time::Duration;
 use tokio::io::{split, AsyncRead, AsyncWriteExt, ReadBuf};
 use tokio::net::TcpStream;
@@ -117,7 +117,7 @@ async fn test_0rtt() -> io::Result<()> {
         .map(DropKill)?;
 
     // wait openssl server
-    sleep(Duration::from_secs(1)).await;
+    sleep(Duration::from_secs(5)).await;
 
     let mut chain = BufReader::new(Cursor::new(include_str!("end.chain")));
     let certs = rustls_pemfile::certs(&mut chain).unwrap();
