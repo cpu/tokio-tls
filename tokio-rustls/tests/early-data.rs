@@ -9,7 +9,7 @@ use std::pin::Pin;
 use std::process::{Child, Command, Stdio};
 use std::sync::Arc;
 use std::task::{Context, Poll};
-use std::{thread, time};
+use std::thread;
 use std::time::Duration;
 use tokio::io::{split, AsyncRead, AsyncWriteExt, ReadBuf};
 use tokio::net::TcpStream;
