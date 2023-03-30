@@ -68,7 +68,7 @@ async fn send(
             let ret = Pin::new(&mut read_task).poll(cx)?;
             assert_eq!(ret, Poll::Pending);
 
-            notify.take().unwrap().send(()).unwrap();
+            notify.take().unwrap().send(()).expect("failed notify take");
 
             Poll::Ready(Ok(())) as Poll<io::Result<_>>
         })
@@ -83,7 +83,7 @@ async fn send(
         Ok(rd) as io::Result<_>
     });
 
-    wait.await.unwrap();
+    wait.await.expect("failed wait");
 
     wd.write_all(data).await?;
     wd.flush().await?;
