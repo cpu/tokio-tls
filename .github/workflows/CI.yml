@@ -3,7 +3,6 @@ name: CI
 on:
   push:
     branches:
-    - master
   pull_request: {}
   schedule:
     - cron: "33 4 * * 5"
